@@ -13,13 +13,14 @@ const Navbar = () => {
         className="
             font-semibold
             flex
+            items-center
             sm:justify-around
             justify-between
             mx-5
             py-5"
       >
         <Link to="/">
-          <p>
+          <p className="text-lg">
             <span className="font-medium">NOVOMED</span>
             <span className="font-normal">KZ</span>
           </p>
@@ -37,52 +38,38 @@ const Navbar = () => {
           <NavbarLink link="/contacts" value="Контакты" />
         </ul>
 
-        <GrMenu className="sm:hidden" onClick={() => setIsOpen(true)} />
+        <div className="p-3 sm:hidden rounded-full bg-lightBlue">
+          {!isOpen && (
+            <GrMenu className="text-xl" onClick={() => setIsOpen(true)} />
+          )}
+          {isOpen && (
+            <GrClose className="text-xl" onClick={() => setIsOpen(false)} />
+          )}
+        </div>
       </div>
 
       {isOpen && (
         <>
           <div
             className="
-                bg-opacity-25
-                bg-dark
-                top-0
-                h-screen
-                absolute
-                w-full
-                z-0"
-            onClick={() => setIsOpen(false)}
-          ></div>
-          <div
-            className="
                 flex 
                 justify-between
-                w-4/5
+                w-full
                 h-screen
                 bg-light
                 top-0
-                p-5
-                absolute
                 z-10"
           >
-            <ul className="list-item">
-              <Link to="/" onClick={() => setIsOpen(false)}>
-                <p className="mt-4">О нас</p>
-              </Link>{" "}
-              <br />
-              <Link to="/companies" onClick={() => setIsOpen(false)}>
-                <p>Фирмы</p>
-              </Link>{" "}
-              <br />
-              <Link to="/items" onClick={() => setIsOpen(false)}>
-                <p>Продукция</p>
-              </Link>{" "}
-              <br />
-              <Link to="/contacts" onClick={() => setIsOpen(false)}>
-                <p>Контакты</p>
-              </Link>
+            <ul
+              className="
+                list-item 
+                w-full"
+            >
+              <NavbarLink link="/" value="О нас" />
+              <NavbarLink link="/companies" value="Фирмы" />
+              <NavbarLink link="/items" value="Продукция" />
+              <NavbarLink link="/contacts" value="Контакты" />
             </ul>
-            <GrClose onClick={() => setIsOpen(false)} />
           </div>
         </>
       )}
